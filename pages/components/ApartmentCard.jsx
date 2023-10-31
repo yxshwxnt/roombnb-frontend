@@ -3,9 +3,9 @@ import Image from "next/image";
 
 const ApartmentCard = ({ apartment }) => {
   return (
-    <div> 
+    <div className="shadow-lg rounded-md"> 
       <img 
-        src={apartment.image}
+        src={apartment.images[0]}
         alt={apartment.title}
         className="w-full h-48 object-cover object-center"
       />
