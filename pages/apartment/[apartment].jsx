@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Header from "../components/Header";
+import { Button } from "@nextui-org/react";
+import Link from "next/link";
 import MapComponent from "../components/MapComponent";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -99,12 +101,17 @@ const ApartmentDetails = () => {
 
               {/* Contact Seller and Find Roommates */}
               <div className="flex justify-between mt-8">
-                <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                <Button as={Link} color="primary" href="/seller" variant="flat">
                   Contact Seller
-                </button>
-                <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                  Find Roommates
-                </button>
+                </Button>
+                <Button
+                  as={Link}
+                  color="success"
+                  href="/FindRoomate"
+                  variant="flat"
+                >
+                  Find a roomate
+                </Button>
               </div>
             </div>
           </div>

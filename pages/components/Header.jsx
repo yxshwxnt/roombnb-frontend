@@ -16,7 +16,7 @@ export default function App() {
           src="C:\Users\yashw\Desktop\roombnb\frontend\public\room.png"
           alt="icon"
         /> */}
-        <Link className="font-bold text-inherit" href="/Books">
+        <Link className="font-bold text-inherit" href="/">
           roombnb
         </Link>
       </NavbarBrand>
@@ -37,7 +37,7 @@ export default function App() {
           <Button
             as={Link}
             color="primary"
-            href="/Seller"
+            href="/seller"
             variant="flat"
             className="mr-2"
           >
