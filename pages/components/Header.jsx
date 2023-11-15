@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -6,16 +6,23 @@ import {
   NavbarItem,
   Link,
   Button,
+  Select,
+  SelectItem,
 } from "@nextui-org/react";
 
-export default function App() {
+const locations = ["City1", "City2", "City3"];
+
+export default function App({ onChangeLocation }) {
+  const [selectedLocation, setSelectedLocation] = useState("");
+
+  const handleLocationChange = (value) => {
+    setSelectedLocation(value);
+    onChangeLocation(value);
+  };
+
   return (
     <Navbar color={"danger"}>
       <NavbarBrand>
-        {/* <img
-          src="C:\Users\yashw\Desktop\roombnb\frontend\public\room.png"
-          alt="icon"
-        /> */}
         <Link className="font-bold text-inherit" href="/">
           roombnb
         </Link>
@@ -27,13 +34,25 @@ export default function App() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href="/" color="foreground" aria-current="page">
-            Landing Page
+          <Link href="/FindRoomate" color="foreground" aria-current="page">
+            Find Roomate
           </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
+          <Select
+            label="Select City"
+            value={selectedLocation} 
+            size="sm"
+            onChange={(e) => handleLocationChange(e.target.value)}
+          >
+            {locations.map((location) => (
+              <SelectItem key={location} value={location}>
+                {location}
+              </SelectItem>
+            ))}
+          </Select>
           <Button
             as={Link}
             color="primary"
@@ -43,12 +62,8 @@ export default function App() {
           >
             Connect as a Seller
           </Button>
-          <Button as={Link} color="primary" href="/FindRoomate" variant="flat">
-            Find a roomate
-          </Button>
         </NavbarItem>
       </NavbarContent>
     </Navbar>
   );
 }
-2;

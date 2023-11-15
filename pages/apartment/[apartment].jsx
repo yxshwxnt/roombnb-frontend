@@ -53,7 +53,7 @@ const ApartmentDetails = () => {
               <h1 className="text-4xl font-semibold mb-4 mt-8">
                 {apartment.title}
               </h1>
-              <p className="text-gray-600 mb-4">${apartment.rent} per night</p>
+              <p className="text-gray-600 mb-4">${apartment.rent} per month</p>
               <p className="text-gray-700 mb-4">{apartment.location}</p>
               <p className="text-gray-700 mb-8">{apartment.description}</p>
 

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import EditApartment from "../components/EditApartment"; 
+import Header from "../components/Header";
+import EditApartment from "../components/EditApartment";
 import ApartmentCard from "../components/ApartmentCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Navbar } from "@nextui-org/react";
 
 const index = () => {
   const router = useRouter();
@@ -42,8 +44,6 @@ const index = () => {
 
   const handleEditSubmit = async (formData) => {
     try {
-      // Simulated API call to update apartment data
-      // Replace the following line with your actual API endpoint and request method
       await fetch(`https://api.example.com/apartments/${apartmentId}`, {
         method: "PUT",
         headers: {
@@ -52,20 +52,17 @@ const index = () => {
         body: JSON.stringify(formData),
       });
 
-      // Update local state with the edited data
       setApartment(formData);
-      setIsEditing(false); // Exit edit mode
+      setIsEditing(false);
     } catch (error) {
       console.error("Error updating apartment data:", error);
     }
   };
 
-  // If apartment data is not loaded yet, show loading message
   if (!apartment.title) {
     return <div>Loading...</div>;
   }
 
-  // Configuration for the react-slick carousel
   const carouselSettings = {
     dots: true,
     infinite: true,
@@ -75,51 +72,59 @@ const index = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="max-w-4xl mx-auto">
-        {isEditing ? (
-          <div>
-            <h1 className="text-4xl font-semibold mb-8 text-center">
-              Edit Apartment
-            </h1>
-            <EditApartment apartment={apartment} onSubmit={handleEditSubmit} />
-          </div>
-        ) : (
-          <div>
-            <div className="flex justify-end mb-4">
-              <button
-                className="btn-primary"
-                onClick={() => setIsEditing(true)}
-              >
+    <>
+      <Header />
+      <div className="container mx-auto p-4">
+        <div className="max-w-4xl mx-auto">
+          {isEditing ? (
+            <div>
+              <h1 className="text-4xl font-semibold mb-8 text-center">
                 Edit Apartment
-              </button>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              {/* Carousel for apartment images */}
-              <Slider {...carouselSettings}>
-                {apartment.images &&
-                  apartment.images.map((image, index) => (
-                    <div key={index}>
-                      <img
-                        src={image}
-                        alt={`Apartment Image ${index + 1}`}
-                        className="w-full h-64 object-cover"
-                      />
-                    </div>
-                  ))}
-              </Slider>
-              <h1 className="text-4xl font-semibold mb-4 mt-8">
-                {apartment.title}
               </h1>
-              <p className="text-gray-600 mb-4">${apartment.rent} per night</p>
-              <p className="text-gray-700 mb-4">{apartment.location}</p>
-              <p className="text-gray-700 mb-8">{apartment.description}</p>
-              {/* Display other apartment details */}
+              <EditApartment
+                apartment={apartment}
+                onSubmit={handleEditSubmit}
+              />
             </div>
-          </div>
-        )}
+          ) : (
+            <div>
+              <div className="flex justify-end mb-4">
+                <button
+                  className="btn-primary"
+                  onClick={() => setIsEditing(true)}
+                >
+                  Edit Apartment
+                </button>
+              </div>
+              <div className="bg-white rounded-lg shadow-lg p-8">
+                {/* Carousel for apartment images */}
+                <Slider {...carouselSettings}>
+                  {apartment.images &&
+                    apartment.images.map((image, index) => (
+                      <div key={index}>
+                        <img
+                          src={image}
+                          alt={`Apartment Image ${index + 1}`}
+                          className="w-full h-64 object-cover"
+                        />
+                      </div>
+                    ))}
+                </Slider>
+                <h1 className="text-4xl font-semibold mb-4 mt-8">
+                  {apartment.title}
+                </h1>
+                <p className="text-gray-600 mb-4">
+                  ${apartment.rent} per night
+                </p>
+                <p className="text-gray-700 mb-4">{apartment.location}</p>
+                <p className="text-gray-700 mb-8">{apartment.description}</p>
+                {/* Display other apartment details */}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

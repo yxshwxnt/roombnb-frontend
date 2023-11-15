@@ -7,7 +7,6 @@ const MapComponent = ({ latitude, longitude }) => {
       zoom: 15, 
     });
 
-    // Create a marker on the map for the apartment location
     new window.google.maps.Marker({
       position: { lat: latitude, lng: longitude },
       map: map,

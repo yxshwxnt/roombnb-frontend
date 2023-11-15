@@ -5,6 +5,8 @@ import Header from '../components/Header';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
 import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import {
   FaUser,
   FaBriefcase,

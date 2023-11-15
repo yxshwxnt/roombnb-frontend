@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import EditApartment from "../components/EditApartment"; 
+import EditApartment from "../components/EditApartment";
 import ApartmentCard from "../components/ApartmentCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -23,27 +23,8 @@ const ApartmentDetails = () => {
     ],
   });
 
-  //   // Simulated logic to fetch apartment data based on apartmentId
-  //   useEffect(() => {
-  //     // Simulated API call to fetch apartment data
-  //     const fetchApartmentData = async () => {
-  //       try {
-  //         // Replace the following line with your actual API endpoint
-  //         const response = await fetch(`https://api.example.com/apartments/${apartmentId}`);
-  //         const data = await response.json();
-  //         setApartment(data);
-  //       } catch (error) {
-  //         console.error("Error fetching apartment data:", error);
-  //       }
-  //     };
-
-  //     fetchApartmentData();
-  //   }, [apartmentId]);
-
   const handleEditSubmit = async (formData) => {
     try {
-      // Simulated API call to update apartment data
-      // Replace the following line with your actual API endpoint and request method
       await fetch(`https://api.example.com/apartments/${apartmentId}`, {
         method: "PUT",
         headers: {
@@ -52,20 +33,17 @@ const ApartmentDetails = () => {
         body: JSON.stringify(formData),
       });
 
-      // Update local state with the edited data
       setApartment(formData);
-      setIsEditing(false); // Exit edit mode
+      setIsEditing(false);
     } catch (error) {
       console.error("Error updating apartment data:", error);
     }
   };
 
-  // If apartment data is not loaded yet, show loading message
   if (!apartment.title) {
     return <div>Loading...</div>;
   }
 
-  // Configuration for the react-slick carousel
   const carouselSettings = {
     dots: true,
     infinite: true,
