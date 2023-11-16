@@ -51,7 +51,6 @@ export default function App({ onChangeLocation }) {
             value={selectedLocation}
             size="xs"
             className="mx-10"
-            onChange={(e) => handleLocationChange(e.target.value)}
           >
             {locations.map((location) => (
               <SelectItem key={location} value={location}>
