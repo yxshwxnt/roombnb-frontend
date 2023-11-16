@@ -4,7 +4,7 @@ import axios from "axios";
 import Header from "../components/Header";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
-import MapComponent from "../components/MapComponent";
+// import MapComponent from "../components/MapComponent";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Header from "../components/Header";
 import EditApartment from "../components/EditApartment";
-import ApartmentCard from "../components/ApartmentCard";
+// import ApartmentCard from "../components/ApartmentCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Navbar } from "@nextui-org/react";
 
 const index = () => {
   const router = useRouter();

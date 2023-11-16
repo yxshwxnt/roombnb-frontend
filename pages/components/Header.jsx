@@ -38,13 +38,19 @@ export default function App({ onChangeLocation }) {
             Find Roomate
           </Link>
         </NavbarItem>
+        <NavbarItem>
+          <Link href="/seller" color="foreground" aria-current="page">
+            Connect as a Seller
+          </Link>
+        </NavbarItem>
       </NavbarContent>
-      <NavbarContent justify="end">
+      <NavbarContent>
         <NavbarItem>
           <Select
             label="Select City"
-            value={selectedLocation} 
-            size="sm"
+            value={selectedLocation}
+            size="xs"
+            className="mx-10"
             onChange={(e) => handleLocationChange(e.target.value)}
           >
             {locations.map((location) => (
@@ -53,15 +59,6 @@ export default function App({ onChangeLocation }) {
               </SelectItem>
             ))}
           </Select>
-          <Button
-            as={Link}
-            color="primary"
-            href="/seller"
-            variant="flat"
-            className="mr-2"
-          >
-            Connect as a Seller
-          </Button>
         </NavbarItem>
       </NavbarContent>
     </Navbar>
