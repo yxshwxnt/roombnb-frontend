@@ -8,6 +8,14 @@ import Link from "next/link";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import {
+  FaBed,
+  FaBath,
+  FaUtensils,
+  FaWifi,
+  FaUserFriends,
+  FaPhoneAlt,
+} from "react-icons/fa";
 
 const ApartmentDetails = () => {
   const router = useRouter();
@@ -50,10 +58,12 @@ const ApartmentDetails = () => {
                     </div>
                   ))}
               </Slider>
-              <h1 className="text-4xl font-semibold mb-4 mt-8">
+              <h1 className="text-4xl font-semibold mb-4 mt-8 font-serif">
                 {apartment.title}
               </h1>
-              <p className="text-gray-600 mb-4">${apartment.rent} per month</p>
+              <p className="text-gray-600 mb-4 text-4xl font-bold">
+                ${apartment.rent}/month
+              </p>
               <p className="text-gray-700 mb-4">{apartment.location}</p>
               <p className="text-gray-700 mb-8">{apartment.description}</p>
 
@@ -85,9 +95,9 @@ const ApartmentDetails = () => {
               <div className="border-t border-gray-200 pt-6">
                 <h2 className="text-2xl font-semibold mb-2">Location</h2>
                 {/* <MapComponent
-                  latitude={apartment.latitude}
-                  longitude={apartment.longitude}
-                /> */}
+              latitude={apartment.latitude}
+              longitude={apartment.longitude}
+            /> */}
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14881.123477140529!2d79.09839529999999!3d21.1809986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1698786456171!5m2!1sen!2sin"
                   width="100%"
@@ -99,10 +109,35 @@ const ApartmentDetails = () => {
                 />
               </div>
 
+              {/* Features */}
+              <div className="border-t border-gray-200 pt-6">
+                <h2 className="text-2xl font-semibold mb-2">Features</h2>
+                <div className="flex items-center mb-4">
+                  <FaBed className="mr-2" />
+                  <p>2 Double Occupancy</p>
+                </div>
+                <div className="flex items-center mb-4">
+                  <FaBath className="mr-2" />
+                  <p>Attached Washroom</p>
+                </div>
+                <div className="flex items-center mb-4">
+                  <FaUtensils className="mr-2" />
+                  <p>Hot and Delicious Meals</p>
+                </div>
+                <div className="flex items-center mb-4">
+                  <FaWifi className="mr-2" />
+                  <p>High-Speed WIFI</p>
+                </div>
+                <div className="flex items-center mb-4">
+                  <FaUserFriends className="mr-2" />
+                  <p>Professional Housekeeping</p>
+                </div>
+              </div>
+
               {/* Contact Seller and Find Roommates */}
               <div className="flex justify-between mt-8">
                 <Button as={Link} color="primary" href="/seller" variant="flat">
-                  Contact Seller
+                  Request Callback
                 </Button>
                 <Button
                   as={Link}
@@ -110,7 +145,7 @@ const ApartmentDetails = () => {
                   href="/FindRoomate"
                   variant="flat"
                 >
-                  Find a roomate
+                  Find a roommate
                 </Button>
               </div>
             </div>
