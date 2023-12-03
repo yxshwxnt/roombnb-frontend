@@ -8,16 +8,19 @@ import {
   Button,
   Select,
   SelectItem,
+  Autocomplete,
+  AutocompleteSection,
+  AutocompleteItem,
 } from "@nextui-org/react";
 
-const locations = ["City1", "City2", "City3"];
+const locations = ["Nagpur", "Pune", "Banglore","Mumbai","Gurgaon"];
 
-export default function App({ onChangeLocation }) {
+export default function App({ handleFilterChange }) {
   const [selectedLocation, setSelectedLocation] = useState("");
 
   const handleLocationChange = (value) => {
     setSelectedLocation(value);
-    onChangeLocation(value);
+    handleFilterChange(value);
   };
 
   return (
@@ -44,20 +47,20 @@ export default function App({ onChangeLocation }) {
           </Link>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent>
+      <NavbarContent justify="end">
         <NavbarItem>
-          <Select
+          <Autocomplete
             label="Select City"
-            value={selectedLocation}
-            size="xs"
-            className="mx-10"
+            size={"sm"}
+            color={"primary"}
+            variant="flat"
           >
-            {locations.map((location) => (
-              <SelectItem key={location} value={location}>
+            {locations.map((location, index) => (
+              <AutocompleteItem key={index} value={location}>
                 {location}
-              </SelectItem>
+              </AutocompleteItem>
             ))}
-          </Select>
+          </Autocomplete>
         </NavbarItem>
       </NavbarContent>
     </Navbar>

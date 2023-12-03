@@ -20,14 +20,12 @@ export default function Home() {
   }, []);
 
   const handleFilterChange = (filters) => {
-    // Implement filtering logic based on the provided filters
-    // Update the filteredApartments state accordingly
     console.log(filters);
   };
 
   return (
     <>
-      <Header />
+      <Header filter={handleFilterChange} />
       <div className="container m-3 flex h-screen">
         <FilterBox onFilterChange={handleFilterChange} />
         <div className="ml-3 flex-1">

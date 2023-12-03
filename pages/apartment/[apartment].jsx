@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Header from "../components/Header";
+import FindRoommateModal from "../components/FindRoommateModal";
 import { Button } from "@nextui-org/react";
 import Link from "next/link";
 // import MapComponent from "../components/MapComponent";
@@ -16,11 +17,23 @@ import {
   FaUserFriends,
   FaPhoneAlt,
 } from "react-icons/fa";
+import CallbackModal from "../components/CallbackModal";
 
 const ApartmentDetails = () => {
   const router = useRouter();
   const apartmentId = router.query.apartment;
   const [apartment, setApartment] = useState({});
+  const [requestForm, setRequestForm] = useState({
+    name: "",
+    phoneNum: "",
+    occupation: "",
+    email: "",
+  });
+
+  const handleRequestFormChange = (e) => {
+    const { name, value } = e.target;
+    setRequestForm((prev) => ({ ...prev, [name]: value }));
+  };
 
   useEffect(() => {
     const fetchApartments = async () => {
@@ -136,17 +149,11 @@ const ApartmentDetails = () => {
 
               {/* Contact Seller and Find Roommates */}
               <div className="flex justify-between mt-8">
-                <Button as={Link} color="primary" href="/seller" variant="flat">
-                  Request Callback
-                </Button>
-                <Button
-                  as={Link}
-                  color="success"
-                  href="/FindRoomate"
-                  variant="flat"
-                >
-                  Find a roommate
-                </Button>
+                <CallbackModal
+                  requestForm={requestForm}
+                  handleInputChange={handleRequestFormChange}
+                />
+                <FindRoommateModal />
               </div>
             </div>
           </div>

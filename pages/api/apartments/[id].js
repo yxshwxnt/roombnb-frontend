@@ -110,7 +110,7 @@ const apartments = [
     },
 ];
 
-export default function handler(req, res) {
+export default function handler(req, res) { 
     if (req.method === "GET") {
         const { id } = req.query;
 
