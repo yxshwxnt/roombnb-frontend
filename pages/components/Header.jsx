@@ -13,7 +13,7 @@ import {
   AutocompleteItem,
 } from "@nextui-org/react";
 
-const locations = ["Nagpur", "Pune", "Banglore","Mumbai","Gurgaon"];
+const locations = ["Nagpur", "Pune", "Banglore", "Mumbai", "Gurgaon"];
 
 export default function App({ handleFilterChange }) {
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -30,12 +30,8 @@ export default function App({ handleFilterChange }) {
           roombnb
         </Link>
       </NavbarBrand>
+
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="/">
-            Home
-          </Link>
-        </NavbarItem>
         <NavbarItem>
           <Link href="/FindRoomate" color="foreground" aria-current="page">
             Find Roomate
@@ -54,6 +50,8 @@ export default function App({ handleFilterChange }) {
             size={"sm"}
             color={"primary"}
             variant="flat"
+            radius="lg"
+            className="max-w-max"
           >
             {locations.map((location, index) => (
               <AutocompleteItem key={index} value={location}>

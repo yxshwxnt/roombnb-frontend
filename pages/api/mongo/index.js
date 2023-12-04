@@ -1,5 +1,4 @@
 const { connectDB } = require('@/lib/mongoDb');
-const { connectToDatabase } = require('@/lib/conn');
 const objectID = require('mongodb').ObjectId;
 
 export default async function handler(req, res) {
@@ -15,9 +14,9 @@ export default async function handler(req, res) {
 
 async function getApartments(req, res) {
     try {
-        let { db } = await connectToDatabase();
+        let { db } = await connectDB();
         let apartments = await db
-            .collection('inventory')
+            .collection('apartments')
             .find({})
             .toArray();
         return res.send(apartments);

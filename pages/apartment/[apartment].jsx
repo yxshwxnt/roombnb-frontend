@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Header from "../components/Header";
 import FindRoommateModal from "../components/FindRoommateModal";
-import { Button } from "@nextui-org/react";
+import { Button, Skeleton } from "@nextui-org/react";
 import Link from "next/link";
 // import MapComponent from "../components/MapComponent";
 import Slider from "react-slick";
@@ -60,7 +60,7 @@ const ApartmentDetails = () => {
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-lg shadow-lg p-8">
               <Slider {...carouselSettings}>
-                {apartment.images &&
+                {apartment.images ? (
                   apartment.images.map((image, index) => (
                     <div key={index}>
                       <img
@@ -69,16 +69,39 @@ const ApartmentDetails = () => {
                         className="w-full h-64 object-cover"
                       />
                     </div>
-                  ))}
+                  ))
+                ) : (
+                  <Skeleton className="h-[400px]" />
+                )}
               </Slider>
               <h1 className="text-4xl font-semibold mb-4 mt-8 font-serif">
-                {apartment.title}
+                {apartment.title ? (
+                  apartment.title
+                ) : (
+                  <Skeleton className="h-[30px] w-[400px]" />
+                )}
               </h1>
               <p className="text-gray-600 mb-4 text-4xl font-bold">
-                ${apartment.rent}/month
+                {apartment.rent ? (
+                  `$${apartment.rent}/month`
+                ) : (
+                  <Skeleton className="h-[20px] w-[100px]" />
+                )}
               </p>
-              <p className="text-gray-700 mb-4">{apartment.location}</p>
-              <p className="text-gray-700 mb-8">{apartment.description}</p>
+              <p className="text-gray-700 mb-4">
+                {apartment.location ? (
+                  apartment.location
+                ) : (
+                  <Skeleton className="h-[20px] w-[200px]" />
+                )}
+              </p>
+              <p className="text-gray-700 mb-8">
+                {apartment.description ? (
+                  apartment.description
+                ) : (
+                  <Skeleton className="h-[100px]" />
+                )}
+              </p>
 
               {/* Seller Info */}
               <div className="border-t border-gray-200 pt-6">
