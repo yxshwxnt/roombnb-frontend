@@ -5,6 +5,7 @@
     "rent": 2000,
     "location": "Tripathi Heights, Plot No 68, Survey No 302/3A/1, Sai Samruddhi, Dy Patil University Rd,, Lohegaon Dhanori, Pune",
     "description": "Spacious and modern apartment with stunning city views. Close to all amenities.",
+    "status": "Available",
     "features": [
       "2 Double Occupancy",
       "Attached Washroom",
@@ -28,6 +29,7 @@
     "rent": 1200,
     "location": "Tripathi Heights, Plot No 68, Survey No 302/3A/1, Sai Samruddhi, Dy Patil University Rd,, Lohegaon Dhanori, Pune",
     "description": "Charming studio apartment with a lovely park view. Quiet and peaceful neighborhood.",
+    "status": "Available",
     "images": [
       "https://res.cloudinary.com/apartmentlist/image/upload/f_auto,q_auto,t_web-base/8328d31a1779e0cf5e9d25fc840bdfe0.jpg",
       "https://media.istockphoto.com/id/1384642884/photo/the-evening-sun-is-reflected-in-the-modern-glass-facade-with-balconies.webp?b=1&s=170667a&w=0&k=20&c=9cnDfc9tNIAcgvuGHZkST7CP-dFaNXutX8OpzVO1jEA="
@@ -44,6 +46,7 @@
     "rent": 1200,
     "location": "Tripathi Heights, Plot No 68, Survey No 302/3A/1, Sai Samruddhi, Dy Patil University Rd,, Lohegaon Dhanori, Pune",
     "description": "Charming studio apartment with a lovely park view. Quiet and peaceful neighborhood.",
+    "status": "Available",
     "images": [
       "https://images1.apartments.com/i2/_rDyXkgVut3AB6y99xWmxPi0QwfFSFePsqzNj2JJfLQ/111/image.jpg",
       "https://media.istockphoto.com/id/1393537665/photo/modern-townhouse-design.webp?b=1&s=170667a&w=0&k=20&c=vlUsVGOI_lm_cZUwwHZWeBL5RRfxYHExELD5vOGTwV8=",
@@ -61,6 +64,7 @@
     "rent": 1200,
     "location": "Tripathi Heights, Plot No 68, Survey No 302/3A/1, Sai Samruddhi, Dy Patil University Rd,, Lohegaon Dhanori, Pune",
     "description": "Charming studio apartment with a lovely park view. Quiet and peaceful neighborhood.",
+    "status": "Available",
     "images": [
       "https://images1.apartments.com/i2/48BUPMHq-vpcujZrVtR_u-tfQXsLVIISwJJjtSoJGdI/111/rivers-edge-apartments---open-now-coeur-dalene-id-building-photo.jpg",
       "https://media.istockphoto.com/id/1393537665/photo/modern-townhouse-design.webp?b=1&s=170667a&w=0&k=20&c=vlUsVGOI_lm_cZUwwHZWeBL5RRfxYHExELD5vOGTwV8="
@@ -77,6 +81,7 @@
     "rent": 1200,
     "location": "Tripathi Heights, Plot No 68, Survey No 302/3A/1, Sai Samruddhi, Dy Patil University Rd,, Lohegaon Dhanori, Pune",
     "description": "Charming studio apartment with a lovely park view. Quiet and peaceful neighborhood.",
+    "status": "Available",
     "images": [
       "https://media.istockphoto.com/id/1384642884/photo/the-evening-sun-is-reflected-in-the-modern-glass-facade-with-balconies.webp?b=1&s=170667a&w=0&k=20&c=9cnDfc9tNIAcgvuGHZkST7CP-dFaNXutX8OpzVO1jEA="
     ],
@@ -92,6 +97,7 @@
     "rent": 1200,
     "location": "Tripathi Heights, Plot No 68, Survey No 302/3A/1, Sai Samruddhi, Dy Patil University Rd,, Lohegaon Dhanori, Pune",
     "description": "Charming studio apartment with a lovely park view. Quiet and peaceful neighborhood.",
+    "status": "Available",
     "images": [
       "https://images1.apartments.com/i2/_rDyXkgVut3AB6y99xWmxPi0QwfFSFePsqzNj2JJfLQ/111/image.jpg"
     ],

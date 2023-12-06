@@ -1,47 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import EditApartment from "../components/EditApartment";
+import axios from "axios";
+import Header from "../components/Header";
+import { Button, Skeleton } from "@nextui-org/react";
+import Link from "next/link";
+// import MapComponent from "../components/MapComponent";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import {
+  FaBed,
+  FaBath,
+  FaUtensils,
+  FaWifi,
+  FaUserFriends,
+  FaPhoneAlt,
+  FaEdit,
+} from "react-icons/fa";
+import EditableField from "../components/EditableField";
 
 const ApartmentDetails = () => {
   const router = useRouter();
-  const { apartmentId } = router.query;
-
-  const [isEditing, setIsEditing] = useState(false);
-  const [apartment, setApartment] = useState({
-    title: "Cozy Studio near Park",
-    rent: 1200,
-    location: "Parkside, Suburb",
-    description:
-      "Charming studio apartment with a lovely park view. Quiet and peaceful neighborhood.",
-    images: [
-      "https://media.istockphoto.com/id/1393537665/photo/modern-townhouse-design.webp?b=1&s=170667a&w=0&k=20&c=vlUsVGOI_lm_cZUwwHZWeBL5RRfxYHExELD5vOGTwV8=",
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YXBhcnRtZW50fGVufDB8fDB8fHww",
-    ],
-  });
-
-  const handleEditSubmit = async (formData) => {
-    try {
-      await fetch(`https://api.example.com/apartments/${apartmentId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      setApartment(formData);
-      setIsEditing(false);
-    } catch (error) {
-      console.error("Error updating apartment data:", error);
-    }
-  };
-
-  if (!apartment.title) {
-    return <div>Loading...</div>;
-  }
+  const apartmentId = router.query.apartment;
+  const [apartment, setApartment] = useState({});
+  useEffect(() => {
+    const fetchApartments = async () => {
+      const response = await axios.get(`/api/apartments/1`);
+      setApartment(response.data);
+      console.log(apartment);
+    };
+    fetchApartments();
+  }, []);
 
   const carouselSettings = {
     dots: true,
@@ -52,29 +41,14 @@ const ApartmentDetails = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="max-w-4xl mx-auto">
-        {isEditing ? (
-          <div>
-            <h1 className="text-4xl font-semibold mb-8 text-center">
-              Edit Apartment
-            </h1>
-            <EditApartment apartment={apartment} onSubmit={handleEditSubmit} />
-          </div>
-        ) : (
-          <div>
-            <div className="flex justify-end mb-4">
-              <button
-                className="btn-primary"
-                onClick={() => setIsEditing(true)}
-              >
-                Edit Apartment
-              </button>
-            </div>
+    <>
+      <div>
+        <Header />
+        <div className="container mx-auto p-4">
+          <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-lg shadow-lg p-8">
-              {/* Carousel for apartment images */}
               <Slider {...carouselSettings}>
-                {apartment.images &&
+                {apartment.images ? (
                   apartment.images.map((image, index) => (
                     <div key={index}>
                       <img
@@ -83,20 +57,119 @@ const ApartmentDetails = () => {
                         className="w-full h-64 object-cover"
                       />
                     </div>
-                  ))}
+                  ))
+                ) : (
+                  <Skeleton className="h-[400px]" />
+                )}
               </Slider>
-              <h1 className="text-4xl font-semibold mb-4 mt-8">
-                {apartment.title}
+              <h1 className="text-4xl font-semibold mb-4 mt-8 font-serif relative">
+                <EditableField
+                  value={apartment.title}
+                  onSubmit={(newValue) =>
+                    console.log("Update title in the database", newValue)
+                  }
+                />
               </h1>
-              <p className="text-gray-600 mb-4">${apartment.rent} per night</p>
-              <p className="text-gray-700 mb-4">{apartment.location}</p>
-              <p className="text-gray-700 mb-8">{apartment.description}</p>
-              {/* Display other apartment details */}
+
+              <p className="text-gray-600 mb-4 text-4xl font-bold relative flex">
+                <EditableField
+                  value={apartment.rent}
+                  onSubmit={(newValue) =>
+                    console.log("Update rent in the database", newValue)
+                  }
+                />
+                <p>/month</p>
+              </p>
+
+              <p className="text-gray-700 mb-4">
+                <EditableField
+                  value={apartment.location}
+                  onSubmit={(newValue) =>
+                    console.log("Update location in the database", newValue)
+                  }
+                />
+              </p>
+
+              <p className="text-gray-700 mb-8">
+                <EditableField
+                  value={apartment.description}
+                  onSubmit={(newValue) =>
+                    console.log("Update description in the database", newValue)
+                  }
+                />
+              </p>
+
+              {/* Seller Info */}
+              <div className="border-t border-gray-200 pt-6">
+                <h2 className="text-2xl font-semibold mb-2">
+                  Seller Information
+                </h2>
+                <div className="flex items-center mb-4">
+                  {apartment.sellerPhoto && (
+                    <img
+                      src={apartment.sellerPhoto}
+                      alt="Seller"
+                      className="w-12 h-12 rounded-full mr-4"
+                    />
+                  )}
+                  <div>
+                    <p className="text-gray-700 mb-1">
+                      Name: {apartment.sellerName}
+                    </p>
+                    <p className="text-gray-700 mb-1">
+                      Email: {apartment.sellerEmail}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Location Map */}
+              <div className="border-t border-gray-200 pt-6">
+                <h2 className="text-2xl font-semibold mb-2">Location</h2>
+                {/* <MapComponent
+              latitude={apartment.latitude}
+              longitude={apartment.longitude}
+            /> */}
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14881.123477140529!2d79.09839529999999!3d21.1809986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1698786456171!5m2!1sen!2sin"
+                  width="100%"
+                  height="450"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+
+              {/* Features */}
+              <div className="border-t border-gray-200 pt-6">
+                <h2 className="text-2xl font-semibold mb-2">Features</h2>
+                <div className="flex items-center mb-4">
+                  <FaBed className="mr-2" />
+                  <p>2 Double Occupancy</p>
+                </div>
+                <div className="flex items-center mb-4">
+                  <FaBath className="mr-2" />
+                  <p>Attached Washroom</p>
+                </div>
+                <div className="flex items-center mb-4">
+                  <FaUtensils className="mr-2" />
+                  <p>Hot and Delicious Meals</p>
+                </div>
+                <div className="flex items-center mb-4">
+                  <FaWifi className="mr-2" />
+                  <p>High-Speed WIFI</p>
+                </div>
+                <div className="flex items-center mb-4">
+                  <FaUserFriends className="mr-2" />
+                  <p>Professional Housekeeping</p>
+                </div>
+              </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
