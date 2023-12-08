@@ -74,7 +74,7 @@ const ApartmentDetails = () => {
                   <Skeleton className="h-[400px]" />
                 )}
               </Slider>
-              <h1 className="text-4xl font-semibold mb-4 mt-8 font-serif">
+              <h1 className="text-4xl font-semibold mb-4 mt-8 font-serif italic">
                 {apartment.title ? (
                   apartment.title
                 ) : (
@@ -83,7 +83,7 @@ const ApartmentDetails = () => {
               </h1>
               <p className="text-gray-600 mb-4 text-4xl font-bold">
                 {apartment.rent ? (
-                  `$${apartment.rent}/month`
+                  8377`${apartment.rent}/month`
                 ) : (
                   <Skeleton className="h-[20px] w-[100px]" />
                 )}
