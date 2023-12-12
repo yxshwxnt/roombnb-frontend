@@ -21,22 +21,27 @@ import {
 
 const ApartmentDetails = () => {
   const router = useRouter();
-  let apartmentId = router.query.apartmentId;
-  console.log(apartmentId);
+  const apartmentId = router.query.apartment;
   const [apartment, setApartment] = useState({});
+
   useEffect(() => {
     const fetchApartments = async () => {
-      const response = await axios.get(`/api/apartments/4`);
-      // const res = await axios.get(`/api/apartments/${apartmentId}`);
-      setApartment(response.data);
-      console.log(response.data);
+      if (apartmentId) {
+        try {
+          const response = await axios.get(`/api/seller/${apartmentId}`);
+          setApartment(response.data);
+          console.log(response.data);
+        } catch (error) {
+          console.error("Error fetching apartment:", error);
+        }
+      }
     };
     fetchApartments();
-  }, []);
+  }, [apartmentId]);
 
   const handleUpdate = async (field, newValue) => {
     try {
-      const res = await axios.put(`/api/apartments/${apartment.id}`, {
+      const res = await axios.put(`/api/seller/${apartment.id}`, {
         [field]: newValue,
       });
       alert(`Updated ${field}: ${newValue}`);
@@ -54,7 +59,7 @@ const ApartmentDetails = () => {
   };
 
   return (
-    <>
+    <div>
       <Header />
       <div className="container mx-auto p-4">
         <div className="max-w-4xl mx-auto">
@@ -76,23 +81,31 @@ const ApartmentDetails = () => {
             </Slider>
 
             <h1 className="text-4xl font-semibold mb-4 mt-8 font-serif italic">
-              <EasyEdit
-                type={Types.TEXT}
-                value={apartment.title}
-                onSave={(newValue) => handleUpdate("title", newValue)}
-              />
+              {apartment.title !== undefined ? (
+                <EasyEdit
+                  type={Types.TEXT}
+                  value={apartment.title}
+                  onSave={(newValue) => handleUpdate("title", newValue)}
+                />
+              ) : (
+                <Skeleton className="h-[30px] w-[400px]" />
+              )}
             </h1>
 
             <div className="text-gray-600 mb-4 text-4xl font-bold flex">
               <p>&#8377;</p>
-              <EasyEdit
-                type={Types.NUMBER}
-                value={apartment.rent}
-                onSave={(newValue) => handleUpdate("rent", newValue)}
-                attributes={{
-                  style: { width: "100px" }, // Adjust the width as needed
-                }}
-              />
+              {apartment.rent !== undefined ? (
+                <EasyEdit
+                  type={Types.NUMBER}
+                  value={apartment.rent}
+                  onSave={(newValue) => handleUpdate("rent", newValue)}
+                  attributes={{
+                    style: { width: "100px" }, // Adjust the width as needed
+                  }}
+                />
+              ) : (
+                <Skeleton className="h-[30px] w-[100px]" />
+              )}
               <p>/month</p>
             </div>
 
@@ -181,7 +194,7 @@ const ApartmentDetails = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

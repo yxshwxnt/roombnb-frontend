@@ -15,8 +15,8 @@ import {
 
 const locations = ["Nagpur", "Pune", "Banglore", "Mumbai", "Gurgaon"];
 
-export default function App({ handleFilterChange }) {
-  const [selectedLocation, setSelectedLocation] = useState("");
+export default function App({ handleFilterChange, city }) {
+  const [selectedLocation, setSelectedLocation] = useState(city);
 
   const handleLocationChange = (value) => {
     setSelectedLocation(value);
@@ -51,10 +51,11 @@ export default function App({ handleFilterChange }) {
             color={"primary"}
             variant="flat"
             radius="lg"
+            value={selectedLocation}
             className="max-w-max"
           >
             {locations.map((location, index) => (
-              <AutocompleteItem key={index} value={location}>
+              <AutocompleteItem key={index} value={selectedLocation}>
                 {location}
               </AutocompleteItem>
             ))}

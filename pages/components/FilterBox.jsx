@@ -10,36 +10,66 @@ import {
   AutocompleteItem,
 } from "@nextui-org/react";
 
-const FilterBox = ({ onFilterChange }) => {
+const FilterBox = ({ apartments, onFilterChange }) => {
   const [priceRange, setPriceRange] = useState([0, 10000]);
-  const [bedroomChecked, setBedroomChecked] = useState(false);
-  const [bathroomChecked, setBathroomChecked] = useState(false);
-  const [mealsChecked, setMealsChecked] = useState(false);
-  const [wifiChecked, setWifiChecked] = useState(false);
+  const [selectedFeatures, setSelectedFeatures] = useState([]);
   const [locality, setLocality] = useState("");
   const [genderPreference, setGenderPreference] = useState("");
+  const [sortOption, setSortOption] = useState("");
 
   const handleFilterChange = () => {
     const filters = {
       priceRange,
-      bedroomChecked,
-      bathroomChecked,
-      mealsChecked,
-      wifiChecked,
+      selectedFeatures,
       locality,
       genderPreference,
       sortOption,
-      setSortOption,
     };
-    onFilterChange(filters);
+    const filteredApartments = applyFilters(apartments, filters);
+    console.log("Filtered Apart", locality);
+    onFilterChange(filteredApartments);
   };
 
-  const localities = ["Locality1", "Locality2", "Locality3"];
+  const applyFilters = (data, filters) => {
+    return data.filter((apartment) => {
+      const priceInRange =
+        apartment.rent >= filters.priceRange[0] &&
+        apartment.rent <= filters.priceRange[1];
+
+      const featuresMatch =
+        filters.selectedFeatures.length === 0 ||
+        filters.selectedFeatures.every((feature) =>
+          (apartment.features ?? []).includes(feature)
+        );
+
+      const localityMatch =
+        !filters.locality ||
+        apartment.locality.toLowerCase() === locality.toLowerCase();
+
+      const genderMatch =
+        !filters.genderPreference ||
+        apartment.gender.toLowerCase() ===
+          filters.genderPreference.toLowerCase();
+
+      return priceInRange && featuresMatch && localityMatch && genderMatch;
+    });
+  };
+
+  const allFeatures = Array.from(
+    new Set(apartments.flatMap((apartment) => apartment.features))
+  );
+
+  const localities = Array.from(
+    new Set(apartments.map((apartment) => apartment.locality))
+  );
+
+  const handleChange = (value) => {
+    console.log("Selected Locality:", value);
+    setLocality(value);
+  };
+
   const genders = ["Male", "Female", "Any"];
-  const sortOptions = [
-    "Price (Low to High)",
-    "Ratings (High to Low)",
-  ];
+  const sortOptions = ["Price (Low to High)", "Ratings (High to Low)"];
 
   return (
     <div className="bg-gray-100 mt-16 p-4 rounded-md shadow-md">
@@ -60,6 +90,7 @@ const FilterBox = ({ onFilterChange }) => {
           label="Select Locality"
           variant="bordered"
           className="max-w-xs"
+          onChange={(value) => setLocality(value)}
         >
           {localities.map((locality, index) => (
             <AutocompleteItem key={index} value={locality}>
@@ -67,28 +98,9 @@ const FilterBox = ({ onFilterChange }) => {
             </AutocompleteItem>
           ))}
         </Autocomplete>
-        {/* <label className="block text-sm font-medium text-gray-700">
-          Locality
-        </label>
-        <select
-          className="w-full p-2 border border-gray-300 rounded-md"
-          value={locality}
-          onChange={(e) => setLocality(e.target.value)}
-        >
-          <option value="">Select Locality</option>
-          {localities.map((loc, index) => (
-            <option key={index} value={loc}>
-              {loc}
-            </option>
-          ))}
-        </select> */}
       </div>
       <div className="mb-6">
-        <Select
-          label="Gender"
-          variant="bordered"
-          className="max-w-xs"
-        >
+        <Select label="Gender" variant="bordered" className="max-w-xs">
           {genders.map((gender, index) => (
             <SelectItem key={index} value={gender}>
               {gender}
@@ -101,42 +113,20 @@ const FilterBox = ({ onFilterChange }) => {
           Amenities
         </label>
         <div className="grid grid-cols-3 items-center gap-2">
-          <SelectiveButton
-            label="Bedroom"
-            icon={<FaBed />}
-            selected={bedroomChecked}
-            onClick={() => setBedroomChecked(!bedroomChecked)}
-          />
-          <SelectiveButton
-            label="Bathroom"
-            icon={<FaBath />}
-            selected={bathroomChecked}
-            onClick={() => setBathroomChecked(!bathroomChecked)}
-          />
-          <SelectiveButton
-            label="Meals"
-            icon={<FaUtensils />}
-            selected={mealsChecked}
-            onClick={() => setMealsChecked(!mealsChecked)}
-          />
-          <SelectiveButton
-            label="Wifi"
-            icon={<FaWifi />}
-            selected={wifiChecked}
-            onClick={() => setWifiChecked(!wifiChecked)}
-          />
-          <SelectiveButton
-            label="B"
-            icon={<FaWifi />}
-            selected={wifiChecked}
-            onClick={() => setWifiChecked(!wifiChecked)}
-          />
-          <SelectiveButton
-            label="A"
-            icon={<FaWifi />}
-            selected={wifiChecked}
-            onClick={() => setWifiChecked(!wifiChecked)}
-          />
+          {allFeatures.map((feature, index) => (
+            <SelectiveButton
+              key={index}
+              label={feature}
+              selected={selectedFeatures.includes(feature)}
+              onClick={() =>
+                setSelectedFeatures((prev) =>
+                  prev.includes(feature)
+                    ? prev.filter((item) => item !== feature)
+                    : [...prev, feature]
+                )
+              }
+            />
+          ))}
         </div>
       </div>
       <div className="mb-6">

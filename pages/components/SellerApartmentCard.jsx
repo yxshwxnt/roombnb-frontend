@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 const SellerApartmentCard = ({
   apartment,

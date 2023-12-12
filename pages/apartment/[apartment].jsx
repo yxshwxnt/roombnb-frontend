@@ -83,7 +83,9 @@ const ApartmentDetails = () => {
               </h1>
               <p className="text-gray-600 mb-4 text-4xl font-bold">
                 {apartment.rent ? (
-                  8377`${apartment.rent}/month`
+                  <p className="text-gray-600 mb-4 text-4xl font-bold">
+                    &#8377;{apartment.rent}/month
+                  </p>
                 ) : (
                   <Skeleton className="h-[20px] w-[100px]" />
                 )}
