@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
-import Header from "../components/Header";
+import SellerHeader from "../components/SellerHeader";
 import SellerApartmentCard from "../components/SellerApartmentCard";
 
 const SellerPage = () => {
@@ -53,7 +53,7 @@ const SellerPage = () => {
 
   return (
     <>
-      <Header />
+      <SellerHeader />
       <div className="container mx-auto p-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {apartments.map((apartment) => (
           <Link href={`/seller/${apartment.id}`} passHref>

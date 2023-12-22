@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import Header from "../components/Header";
+import SellerHeader from "../components/SellerHeader";
 import { Button, Skeleton } from "@nextui-org/react";
 import Link from "next/link";
 // import MapComponent from "../components/MapComponent";
@@ -60,7 +60,7 @@ const ApartmentDetails = () => {
 
   return (
     <div>
-      <Header />
+      <SellerHeader />
       <div className="container mx-auto p-4">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-lg shadow-lg p-8">

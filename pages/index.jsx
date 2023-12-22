@@ -16,6 +16,7 @@ export default function Home() {
       const response = await axios.get("/api/apartments");
       setApartments(response.data);
       setFilteredApartments(response.data);
+      console.log(filteredApartments);
     };
     fetchApartments();
   }, []);
@@ -33,7 +34,7 @@ export default function Home() {
       <Header filter={handleFilterChange} city={city} />
       <div className="container m-3 flex h-screen">
         <FilterBox
-          apartments={apartments}
+          apartments={filteredApartments}
           onFilterChange={handleFilterChange}
         />
         <div className="ml-3 flex-1">

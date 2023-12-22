@@ -11,7 +11,7 @@ import {
 } from "@nextui-org/react";
 
 const FilterBox = ({ apartments, onFilterChange }) => {
-  const [priceRange, setPriceRange] = useState([0, 10000]);
+  const [priceRange, setPriceRange] = useState([3000, 8000]);
   const [selectedFeatures, setSelectedFeatures] = useState([]);
   const [locality, setLocality] = useState("");
   const [genderPreference, setGenderPreference] = useState("");
@@ -26,15 +26,14 @@ const FilterBox = ({ apartments, onFilterChange }) => {
       sortOption,
     };
     const filteredApartments = applyFilters(apartments, filters);
-    console.log("Filtered Apart", locality);
+    console.log("Filtered Apart", filteredApartments);
     onFilterChange(filteredApartments);
   };
 
-  const applyFilters = (data, filters) => {
-    return data.filter((apartment) => {
+  const applyFilters = (apartments, filters) => {
+    return apartments.filter((apartment) => {
       const priceInRange =
-        apartment.rent >= filters.priceRange[0] &&
-        apartment.rent <= filters.priceRange[1];
+        apartment.rent >= priceRange[0] && apartment.rent <= priceRange[1];
 
       const featuresMatch =
         filters.selectedFeatures.length === 0 ||
@@ -82,6 +81,7 @@ const FilterBox = ({ apartments, onFilterChange }) => {
           maxValue={25000}
           defaultValue={[3000, 8000]}
           formatOptions={{ style: "currency", currency: "INR" }}
+          onChange={(values) => setPriceRange(values)}
           className="max-w-md"
         />
       </div>
